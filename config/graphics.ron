@@ -1,0 +1,19 @@
+(
+	sprite_map: {
+		Player(MaskDude): (
+			location: "sprites/Players/MaskDude.png",
+			tile_size: (32.0, 32.0),
+			cols: 12,
+			rows: 4,
+			sheets: {
+				MaskDude(Idle): ( start: 23, frames: 11 ),
+				MaskDude(Jump): ( start: 7, frames: 1 ),
+				MaskDude(DoubleJump): ( start: 0, frames: 6 ),
+				MaskDude(WallJump): ( start: 19, frames: 5),
+				MaskDude(Fall): ( start: 6, frames: 1 ),
+				MaskDude(Hit): (start: 12, frames: 7 ),
+				MaskDude(Run): (start: 44, frames: 12 )
+			}
+		)
+	}
+)
