@@ -14,6 +14,51 @@
 				MaskDude(Hit): (start: 13, frames: 7 ),
 				MaskDude(Run): (start: 45, frames: 12 )
 			}
+		),
+		Player(NinjaFrog): (
+			location: "sprites/Players/NinjaFrog.png",
+			tile_size: (32.0, 32.0),
+			cols: 12,
+			rows: 4,
+			sheets: {
+				NinjaFrog(Idle): ( start: 24, frames: 11 ),
+				NinjaFrog(Jump): ( start: 8, frames: 1 ),
+				NinjaFrog(DoubleJump): ( start: 1, frames: 6 ),
+				NinjaFrog(WallJump): ( start: 20, frames: 5),
+				NinjaFrog(Fall): ( start: 7, frames: 1 ),
+				NinjaFrog(Hit): (start: 13, frames: 7 ),
+				NinjaFrog(Run): (start: 45, frames: 12 )
+			}
+		),
+		Player(PinkMan): (
+			location: "sprites/Players/PinkMan.png",
+			tile_size: (32.0, 32.0),
+			cols: 12,
+			rows: 4,
+			sheets: {
+				PinkMan(Idle): ( start: 24, frames: 11 ),
+				PinkMan(Jump): ( start: 8, frames: 1 ),
+				PinkMan(DoubleJump): ( start: 1, frames: 6 ),
+				PinkMan(WallJump): ( start: 20, frames: 5),
+				PinkMan(Fall): ( start: 7, frames: 1 ),
+				PinkMan(Hit): (start: 13, frames: 7 ),
+				PinkMan(Run): (start: 45, frames: 12 )
+			}
+		),
+		Player(VirtualGuy): (
+			location: "sprites/Players/VirtualGuy.png",
+			tile_size: (32.0, 32.0),
+			cols: 12,
+			rows: 4,
+			sheets: {
+				VirtualGuy(Idle): ( start: 24, frames: 11 ),
+				VirtualGuy(Jump): ( start: 8, frames: 1 ),
+				VirtualGuy(DoubleJump): ( start: 1, frames: 6 ),
+				VirtualGuy(WallJump): ( start: 20, frames: 5),
+				VirtualGuy(Fall): ( start: 7, frames: 1 ),
+				VirtualGuy(Hit): (start: 13, frames: 7 ),
+				VirtualGuy(Run): (start: 45, frames: 12 )
+			}
 		)
 	}
 )

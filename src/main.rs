@@ -1,10 +1,10 @@
+mod animation;
 mod graphics;
 mod player;
+mod prelude;
+mod sprites;
 
-use bevy::{prelude::*, render::camera::ScalingMode, window::PresentMode};
-use bevy_inspector_egui::{Inspectable, WorldInspectorPlugin};
-use graphics::*;
-use player::*;
+use crate::prelude::*;
 
 pub const RESOLUTION: f32 = 16.0 / 9.0;
 
@@ -12,23 +12,60 @@ fn setup(mut commands: Commands) {
     commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
 
-fn test_spawn(mut commands: Commands, graphics: Res<Graphics>) {
-    if let Some(mask_dude) = graphics.get(&Sprites::Player(PlayerType::MaskDude)) {
-        if let Some(idle) = mask_dude
-            .animations
-            .get(&SpriteAnimation::MaskDude(PlayerAnimation::Idle))
-        {
+fn spawn_players(mut commands: Commands, graphics: Res<Graphics>) {
+    spawn_player_type(
+        PlayerType::MaskDude,
+        SpriteAnimation::MaskDude(PlayerState::Idle),
+        &mut commands,
+        &graphics,
+        Vec3::new(-100., 0.0, 100.0),
+    );
+    spawn_player_type(
+        PlayerType::NinjaFrog,
+        SpriteAnimation::NinjaFrog(PlayerState::Idle),
+        &mut commands,
+        &graphics,
+        Vec3::new(-50., 0.0, 100.0),
+    );
+    spawn_player_type(
+        PlayerType::PinkMan,
+        SpriteAnimation::PinkMan(PlayerState::Idle),
+        &mut commands,
+        &graphics,
+        Vec3::new(0.0, 0.0, 100.0),
+    );
+    spawn_player_type(
+        PlayerType::VirtualGuy,
+        SpriteAnimation::VirtualGuy(PlayerState::Idle),
+        &mut commands,
+        &graphics,
+        Vec3::new(50.0, 0.0, 100.0),
+    );
+}
+
+fn spawn_player_type(
+    player_type: PlayerType,
+    sprite_animation: SpriteAnimation,
+    commands: &mut Commands,
+    graphics: &Res<Graphics>,
+    translation: Vec3,
+) {
+    if let Some(player) = graphics.get(&Sprites::Player(player_type)) {
+        if let Some(anim) = player.animations.get(&sprite_animation) {
             commands
                 .spawn_bundle(SpriteSheetBundle {
-                    sprite: TextureAtlasSprite::new(idle.frames[0]),
-                    texture_atlas: mask_dude.texture.clone(),
-                    transform: Transform::from_scale(Vec3::splat(2.0)),
+                    sprite: TextureAtlasSprite::new(anim[0]),
+                    texture_atlas: player.texture.clone(),
+                    transform: Transform {
+                        scale: Vec3::splat(2.0),
+                        translation,
+                        ..default()
+                    },
                     ..default()
                 })
-                .insert(FrameAnimation {
-                    timer: Timer::from_seconds(0.1, true),
-                    frames: idle.frames.to_vec(),
-                    current_frame: 0,
+                .insert(WithAnimation {
+                    frames: anim.to_vec(),
+                    ..default()
                 });
         }
     }
@@ -37,7 +74,7 @@ fn test_spawn(mut commands: Commands, graphics: Res<Graphics>) {
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .insert_resource(ClearColor(Color::DARK_GREEN))
+        .insert_resource(ClearColor(Color::DARK_GRAY))
         .insert_resource(WindowDescriptor {
             width: 900. * RESOLUTION,
             height: 900.,
@@ -47,7 +84,8 @@ fn main() {
             ..default()
         })
         .add_plugin(GraphicsPlugin)
+        .add_plugin(AnimationPlugin)
         .add_startup_system(setup)
-        .add_startup_system(test_spawn)
+        .add_startup_system(spawn_players)
         .run();
 }

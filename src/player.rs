@@ -1,7 +1,7 @@
-use serde::Deserialize;
+use crate::prelude::*;
 
 #[derive(Debug, Deserialize, Clone, Copy, Hash, PartialEq, Eq)]
-pub enum PlayerAnimation {
+pub enum PlayerState {
     Idle,
     Jump,
     DoubleJump,
@@ -14,4 +14,7 @@ pub enum PlayerAnimation {
 #[derive(Debug, Deserialize, Clone, Copy, Hash, PartialEq, Eq)]
 pub enum PlayerType {
     MaskDude,
+    NinjaFrog,
+    PinkMan,
+    VirtualGuy,
 }
