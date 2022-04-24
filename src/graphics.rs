@@ -5,6 +5,13 @@ use bevy::{prelude::*, utils::HashMap};
 use ron::from_str;
 use serde::Deserialize;
 
+#[derive(Component)]
+pub struct FrameAnimation {
+    pub timer: Timer,
+    pub frames: Vec<usize>,
+    pub current_frame: usize,
+}
+
 #[derive(Copy, Clone, Debug, Reflect, Deserialize, Hash, PartialEq, Eq)]
 pub enum Sprites {
     Player(PlayerType),
@@ -35,12 +42,17 @@ struct GraphicsConfig {
     sprite_map: HashMap<Sprites, SpritesDesc>,
 }
 
-#[derive(Debug, Clone)]
-struct Graphics(HashMap<SpriteAnimation, GraphicsDesc>);
+#[derive(Debug, Clone, Deref, DerefMut)]
+pub struct Graphics(HashMap<Sprites, GraphicsDesc>);
 
 #[derive(Debug, Clone)]
-struct GraphicsDesc {
+pub struct GraphicsDesc {
     pub texture: Handle<TextureAtlas>,
+    pub animations: HashMap<SpriteAnimation, GraphicsSpriteDesc>,
+}
+
+#[derive(Debug, Clone)]
+pub struct GraphicsSpriteDesc {
     pub frames: Vec<usize>,
 }
 
@@ -62,7 +74,7 @@ impl GraphicsPlugin {
             };
 
         // This will be injected as a world resource
-        let mut graphics = HashMap::default();
+        let mut sprite_map = HashMap::default();
 
         // Load all sprites
         for (sprite, sprite_desc) in sprite_config.sprite_map.iter() {
@@ -73,27 +85,45 @@ impl GraphicsPlugin {
                 sprite_desc.rows,
             ));
 
+            let mut animation_map = HashMap::default();
+
             // Load all animation clips of texture
             for (anim, anim_desc) in sprite_desc.sheets.iter() {
                 let frames =
                     (anim_desc.start..(anim_desc.start + anim_desc.frames - 1)).collect::<Vec<_>>();
 
-                graphics.insert(
-                    *anim,
-                    GraphicsDesc {
-                        texture: texture_handle.clone(),
-                        frames,
-                    },
-                );
+                animation_map.insert(*anim, GraphicsSpriteDesc { frames });
             }
+
+            sprite_map.insert(
+                *sprite,
+                GraphicsDesc {
+                    texture: texture_handle.clone(),
+                    animations: animation_map,
+                },
+            );
         }
 
-        commands.insert_resource(Graphics(graphics));
+        commands.insert_resource(Graphics(sprite_map));
+    }
+
+    fn frame_animation(
+        mut sprites: Query<(&mut TextureAtlasSprite, &mut FrameAnimation)>,
+        time: Res<Time>,
+    ) {
+        for (mut sprite, mut animation) in sprites.iter_mut() {
+            animation.timer.tick(time.delta());
+            if animation.timer.just_finished() {
+                animation.current_frame = (animation.current_frame + 1) % animation.frames.len();
+                sprite.index = animation.frames[animation.current_frame];
+            }
+        }
     }
 }
 
 impl Plugin for GraphicsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system_to_stage(StartupStage::PreStartup, Self::load_graphics);
+        app.add_startup_system_to_stage(StartupStage::PreStartup, Self::load_graphics)
+            .add_system(Self::frame_animation);
     }
 }

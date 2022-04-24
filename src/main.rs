@@ -1,44 +1,43 @@
 mod graphics;
 mod player;
 
-use std::fs;
-
-use bevy::{prelude::*, window::PresentMode};
-use bevy_asset_loader::{AssetCollection, AssetLoader};
+use bevy::{prelude::*, render::camera::ScalingMode, window::PresentMode};
 use bevy_inspector_egui::{Inspectable, WorldInspectorPlugin};
-use graphics::GraphicsPlugin;
-use ron::from_str;
-use serde::{Deserialize, Serialize};
+use graphics::*;
+use player::*;
 
 pub const RESOLUTION: f32 = 16.0 / 9.0;
 
-#[derive(Component)]
-struct GameCamera;
-
-#[derive(Component)]
-struct Player {
-    speed: f32,
-}
-
-fn load_graphics(
-    mut commands: Commands,
-    assets: Res<AssetServer>,
-    mut texture_assets: ResMut<Assets<TextureAtlas>>,
-) {
-    let sprite_assets = fs::read_to_string("config/sprites.ron").expect("sprite config file");
-}
-
 fn setup(mut commands: Commands) {
-    // Setup camera
-    commands
-        .spawn_bundle(OrthographicCameraBundle::new_2d())
-        .insert(GameCamera);
+    commands.spawn_bundle(OrthographicCameraBundle::new_2d());
+}
+
+fn test_spawn(mut commands: Commands, graphics: Res<Graphics>) {
+    if let Some(mask_dude) = graphics.get(&Sprites::Player(PlayerType::MaskDude)) {
+        if let Some(idle) = mask_dude
+            .animations
+            .get(&SpriteAnimation::MaskDude(PlayerAnimation::Idle))
+        {
+            commands
+                .spawn_bundle(SpriteSheetBundle {
+                    sprite: TextureAtlasSprite::new(idle.frames[0]),
+                    texture_atlas: mask_dude.texture.clone(),
+                    transform: Transform::from_scale(Vec3::splat(2.0)),
+                    ..default()
+                })
+                .insert(FrameAnimation {
+                    timer: Timer::from_seconds(0.1, true),
+                    frames: idle.frames.to_vec(),
+                    current_frame: 0,
+                });
+        }
+    }
 }
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .insert_resource(ClearColor(Color::rgb(0.1, 0.1, 0.1)))
+        .insert_resource(ClearColor(Color::DARK_GREEN))
         .insert_resource(WindowDescriptor {
             width: 900. * RESOLUTION,
             height: 900.,
@@ -48,5 +47,7 @@ fn main() {
             ..default()
         })
         .add_plugin(GraphicsPlugin)
+        .add_startup_system(setup)
+        .add_startup_system(test_spawn)
         .run();
 }
