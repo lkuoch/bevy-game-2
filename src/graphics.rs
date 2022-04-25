@@ -6,7 +6,12 @@ pub struct Graphics(HashMap<Sprites, GraphicsDesc>);
 #[derive(Debug, Clone)]
 pub struct GraphicsDesc {
     pub texture: Handle<TextureAtlas>,
-    pub animations: HashMap<SpriteAnimation, Vec<usize>>,
+    pub animations: HashMap<Sprites, GraphicsAnimationsDesc>,
+}
+
+#[derive(Debug, Clone)]
+pub struct GraphicsAnimationsDesc {
+    pub frames: Vec<usize>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -49,7 +54,10 @@ impl GraphicsPlugin {
             for (anim, anim_desc) in sprite_desc.sheets.iter() {
                 animation_map.insert(
                     *anim,
-                    (anim_desc.start..(anim_desc.start + anim_desc.frames)).collect::<Vec<_>>(),
+                    GraphicsAnimationsDesc {
+                        frames: (anim_desc.start..(anim_desc.start + anim_desc.frames))
+                            .collect::<Vec<_>>(),
+                    },
                 );
             }
 

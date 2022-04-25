@@ -1,17 +1,14 @@
 use crate::prelude::*;
 
-#[derive(Copy, Clone, Debug, Reflect, Deserialize, Hash, PartialEq, Eq)]
-pub enum Sprites {
-    Player(PlayerType),
+#[derive(Debug, Deserialize, Clone, Copy, Hash, PartialEq, Eq)]
+pub enum SpriteModel<T, S> {
+    Type(T),
+    State(S),
 }
 
 #[derive(Copy, Clone, Debug, Reflect, Deserialize, Hash, PartialEq, Eq)]
-pub enum SpriteAnimation {
-    // Use `PlayerType` variants
-    MaskDude(PlayerState),
-    NinjaFrog(PlayerState),
-    PinkMan(PlayerState),
-    VirtualGuy(PlayerState),
+pub enum Sprites {
+    Player(SpriteModel<PlayerType, PlayerState>),
 }
 
 #[derive(Deserialize, Clone, Debug)]
@@ -20,11 +17,11 @@ pub struct SpritesDesc {
     pub tile_size: Vec2,
     pub cols: usize,
     pub rows: usize,
-    pub sheets: HashMap<SpriteAnimation, SpriteAnimationDesc>,
+    pub sheets: HashMap<Sprites, SpriteSheetDesc>,
 }
 
 #[derive(Deserialize, Clone, Debug)]
-pub struct SpriteAnimationDesc {
+pub struct SpriteSheetDesc {
     pub start: usize,
     pub frames: usize,
 }

@@ -1,17 +1,17 @@
 use crate::prelude::*;
 
-#[derive(Debug, Deserialize, Clone, Copy, Hash, PartialEq, Eq)]
+#[derive(Debug, Deserialize, Clone, Copy, EnumIter, Hash, PartialEq, Eq)]
 pub enum PlayerState {
-    Idle,
-    Jump,
     DoubleJump,
-    WallJump,
     Fall,
+    Jump,
     Hit,
+    WallJump,
+    Idle,
     Run,
 }
 
-#[derive(Debug, Deserialize, Clone, Copy, Hash, PartialEq, Eq)]
+#[derive(Debug, Deserialize, Clone, Copy, EnumIter, Hash, PartialEq, Eq)]
 pub enum PlayerType {
     MaskDude,
     NinjaFrog,
