@@ -1,10 +1,11 @@
 use crate::prelude::*;
 
-#[derive(Component)]
+#[derive(Component, Reflect)]
+#[reflect(Component)]
 pub struct WithAnimation {
     pub timer: Timer,
-    pub frames: Vec<usize>,
     pub current_frame: usize,
+    pub frames: Vec<usize>,
 }
 
 pub struct AnimationPlugin;

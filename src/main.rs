@@ -2,6 +2,7 @@ mod animation;
 mod camera;
 mod coordinator;
 mod graphics;
+mod inspector;
 mod player;
 mod prelude;
 mod sprites;
@@ -20,6 +21,7 @@ fn main() {
             resizable: false,
             ..default()
         })
+        .add_plugin(InspectorPlugin)
         .add_plugin(GraphicsPlugin)
         .add_plugin(CoordinatorPlugin)
         .add_plugin(AnimationPlugin)

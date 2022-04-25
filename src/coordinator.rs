@@ -20,17 +20,22 @@ impl CoordinatorPlugin {
                                     scale: Vec3::splat(2.0),
                                     translation: Vec3::new(
                                         (player_idx as f32 * 75.) - 75.,
-                                        (state_idx as f32 * 75.) - 175.,
+                                        -(state_idx as f32 * 75.) + 250.,
                                         100.0,
                                     ),
                                     ..default()
                                 },
                                 ..default()
                             })
+                            .insert(Player {
+                                player_type,
+                                player_state,
+                            })
                             .insert(WithAnimation {
                                 frames: anim.frames.to_vec(),
                                 ..default()
-                            });
+                            })
+                            .insert(Name::new(format!("{player_type}: {player_state}")));
                     }
                 }
             }
