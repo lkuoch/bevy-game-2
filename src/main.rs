@@ -1,11 +1,15 @@
 mod animation;
 mod camera;
 mod coordinator;
+mod enemies;
 mod graphics;
 mod inspector;
 mod player;
 mod prelude;
 mod sprites;
+
+#[macro_use]
+extern crate smart_default;
 
 use crate::prelude::*;
 

@@ -60,6 +60,55 @@
 				Player(State(Idle)): ( start: 24, frames: 11 ),
 				Player(State(Run)): (start: 36, frames: 12 )
 			}
+		),
+
+		/// === ENEMIES ===
+		Enemy(Type(AngryPig)): (
+			location: "sprites/Enemies/AngryPig.png",
+			tile_size: (36.0, 30.0),
+			cols: 16,
+			rows: 5,
+			sheets: {
+				Enemy(State(AngryPig(Hit1))): (start: 0, frames: 5),
+				Enemy(State(AngryPig(Hit2))): (start: 16, frames: 5),
+				Enemy(State(AngryPig(Idle))): (start: 32, frames: 9),
+				Enemy(State(AngryPig(Run))): (start: 48, frames: 12),
+				Enemy(State(AngryPig(Walk))): (start: 64, frames: 16),
+			}
+		),
+		Enemy(Type(Bat)): (
+			location: "sprites/Enemies/Bat.png",
+			tile_size: (46.0, 30.0),
+			cols: 12,
+			rows: 5,
+			sheets: {
+				Enemy(State(Bat(CeilingIn))): (start: 0, frames: 7),
+				Enemy(State(Bat(CeilingOut))): (start: 12, frames: 7),
+				Enemy(State(Bat(Flying))): (start: 24, frames: 7),
+				Enemy(State(Bat(Hit))): (start: 36, frames: 5),
+				Enemy(State(Bat(Idle))): (start: 48, frames: 12),
+			}
+		),
+		Enemy(Type(Bee)): (
+			location: "sprites/Enemies/Bee.png",
+			tile_size: (36.0, 34.0),
+			cols: 8,
+			rows: 3,
+			sheets: {
+				Enemy(State(Bee(Attack))): (start: 0, frames: 8),
+				Enemy(State(Bee(Hit))): (start: 8, frames: 5),
+				Enemy(State(Bee(Idle))): (start: 16, frames: 6),
+			}
+		),
+		Enemy(Type(BlueBird)): (
+			location: "sprites/Enemies/BlueBird.png",
+			tile_size: (32.0, 32.0),
+			cols: 9,
+			rows: 2,
+			sheets: {
+				Enemy(State(BlueBird(Flying))): (start: 0, frames: 9),
+				Enemy(State(BlueBird(Hit))): (start: 9, frames: 5),
+			}
 		)
 	}
 )

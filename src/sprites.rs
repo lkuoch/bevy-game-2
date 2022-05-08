@@ -9,6 +9,7 @@ pub enum SpriteModel<T, S> {
 #[derive(Copy, Clone, Debug, Reflect, Deserialize, Hash, PartialEq, Eq)]
 pub enum Sprites {
     Player(SpriteModel<PlayerType, PlayerState>),
+    Enemy(SpriteModel<EnemyType, EnemyState>),
 }
 
 #[derive(Deserialize, Clone, Debug)]
