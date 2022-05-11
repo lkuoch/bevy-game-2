@@ -17,7 +17,6 @@ impl CoordinatorPlugin {
                                 sprite: TextureAtlasSprite::new(anim.frames[0]),
                                 texture_atlas: player.texture.clone(),
                                 transform: Transform {
-                                    scale: Vec3::splat(2.0),
                                     translation: Vec3::new(
                                         (player_idx as f32 * 75.) - 75.,
                                         -(state_idx as f32 * 75.) + 250.,
@@ -60,8 +59,8 @@ impl CoordinatorPlugin {
                         transform: Transform {
                             scale: Vec3::splat(2.0),
                             translation: Vec3::new(
-                                (outer_idx as f32 * 75.) - 75.,
-                                -(inner_idx as f32 * 75.) + 250.,
+                                (outer_idx as f32 * 125.) - 450.,
+                                -(inner_idx as f32 * 100.) + 250.,
                                 100.0,
                             ),
                             ..default()
@@ -130,6 +129,90 @@ impl CoordinatorPlugin {
                                     spawn(
                                         enemy_graphic,
                                         EnemyState::BlueBird(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Bunny => {
+                            BunnyState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Bunny(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Chameleon => {
+                            ChameleonState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Chameleon(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Chicken => {
+                            ChickenState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Chicken(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Duck => {
+                            DuckState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Duck(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::FatBird => {
+                            FatBirdState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::FatBird(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Ghost => {
+                            GhostState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Ghost(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Mushroom => {
+                            MushroomState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Mushroom(variant),
                                         outer_idx,
                                         inner_idx,
                                     );

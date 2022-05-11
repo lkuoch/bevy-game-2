@@ -109,6 +109,90 @@
 				Enemy(State(BlueBird(Flying))): (start: 0, frames: 9),
 				Enemy(State(BlueBird(Hit))): (start: 9, frames: 5),
 			}
-		)
+		),
+		Enemy(Type(Bunny)): (
+			location: "sprites/Enemies/Bunny.png",
+			tile_size: (34.0, 44.0),
+			cols: 12,
+			rows: 5,
+			sheets: {
+				Enemy(State(Bunny(Fall))): (start: 0, frames: 1),
+				Enemy(State(Bunny(Hit))): (start: 12, frames: 5),
+				Enemy(State(Bunny(Idle))): (start: 24, frames: 8),
+				Enemy(State(Bunny(Jump))): (start: 36, frames: 1),
+				Enemy(State(Bunny(Run))): (start: 48, frames: 12),
+			}
+		),
+		Enemy(Type(Chameleon)): (
+			location: "sprites/Enemies/Chameleon.png",
+			tile_size: (84.0, 38.0),
+			cols: 13,
+			rows: 4,
+			sheets: {
+				Enemy(State(Chameleon(Attack))): (start: 0, frames: 10),
+				Enemy(State(Chameleon(Hit))): (start: 13, frames: 5),
+				Enemy(State(Chameleon(Idle))): (start: 26, frames: 13),
+				Enemy(State(Chameleon(Run))): (start: 39, frames: 8),
+			}
+		),
+		Enemy(Type(Chicken)): (
+			location: "sprites/Enemies/Chicken.png",
+			tile_size: (32.0, 34.0),
+			cols: 14,
+			rows: 3,
+			sheets: {
+				Enemy(State(Chicken(Hit))): (start: 0, frames: 5),
+				Enemy(State(Chicken(Idle))): (start: 14, frames: 13),
+				Enemy(State(Chicken(Run))): (start: 28, frames: 14),
+			}
+		),
+		Enemy(Type(Duck)): (
+			location: "sprites/Enemies/Duck.png",
+			tile_size: (36.0, 36.0),
+			cols: 10,
+			rows: 5,
+			sheets: {
+				Enemy(State(Duck(Fall))): (start: 0, frames: 1),
+				Enemy(State(Duck(Hit))): (start: 10, frames: 5),
+				Enemy(State(Duck(Idle))): (start: 20, frames: 10),
+				Enemy(State(Duck(Jump))): (start: 30, frames: 4),
+				Enemy(State(Duck(JumpAnticipation))): (start: 40, frames: 1),
+			}
+		),
+		Enemy(Type(FatBird)): (
+			location: "sprites/Enemies/FatBird.png",
+			tile_size: (40.0, 48.0),
+			cols: 8,
+			rows: 4,
+			sheets: {
+				Enemy(State(FatBird(Fall))): (start: 0, frames: 4),
+				Enemy(State(FatBird(Ground))): (start: 8, frames: 4),
+				Enemy(State(FatBird(Hit))): (start: 16, frames: 5),
+				Enemy(State(FatBird(Idle))): (start: 24, frames: 8),
+			}
+		),
+		Enemy(Type(Ghost)): (
+			location: "sprites/Enemies/Ghost.png",
+			tile_size: (44.0, 30.0),
+			cols: 10,
+			rows: 4,
+			sheets: {
+				Enemy(State(Ghost(Appear))): (start: 0, frames: 4),
+				Enemy(State(Ghost(Disappear))): (start: 10, frames: 4),
+				Enemy(State(Ghost(Hit))): (start: 20, frames: 5),
+				Enemy(State(Ghost(Idle))): (start: 30, frames: 10),
+			}
+		),
+		Enemy(Type(Mushroom)): (
+			location: "sprites/Enemies/Mushroom.png",
+			tile_size: (32.0, 32.0),
+			cols: 16,
+			rows: 3,
+			sheets: {
+				Enemy(State(Mushroom(Hit))): (start: 0, frames: 6),
+				Enemy(State(Mushroom(Idle))): (start: 16, frames: 14),
+				Enemy(State(Mushroom(Run))): (start: 32, frames: 16),
+			}
+		),
 	}
 )
