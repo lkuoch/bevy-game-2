@@ -1,6 +1,13 @@
 use crate::prelude::*;
 
 pub struct CoordinatorPlugin;
+
+impl Plugin for CoordinatorPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_startup_system(Self::spawn_enemy_variants);
+    }
+}
+
 impl CoordinatorPlugin {
     pub fn spawn_player_variants(mut commands: Commands, graphics: Res<Graphics>) {
         // Render models
@@ -52,6 +59,9 @@ impl CoordinatorPlugin {
             {
                 let enemy_type = enemy_state.get_enemy_type();
 
+                // Magicbound: 19
+                let y_wrap = outer_idx / 19;
+
                 commands
                     .spawn_bundle(SpriteSheetBundle {
                         sprite: TextureAtlasSprite::new(anim.frames[0]),
@@ -59,8 +69,8 @@ impl CoordinatorPlugin {
                         transform: Transform {
                             scale: Vec3::splat(2.0),
                             translation: Vec3::new(
-                                (outer_idx as f32 * 125.) - 450.,
-                                -(inner_idx as f32 * 100.) + 250.,
+                                ((outer_idx % 19) as f32 * 125.) - 1200.,
+                                (inner_idx as f32 * 100. + 200.) - (800 * (outer_idx / 19)) as f32,
                                 100.0,
                             ),
                             ..default()
@@ -218,14 +228,140 @@ impl CoordinatorPlugin {
                                     );
                                 })
                         }
+                        EnemyType::Plant => {
+                            PlantState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Plant(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Radish => {
+                            RadishState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Radish(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Rhino => {
+                            RhinoState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Rhino(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Rock1 => {
+                            Rock1State::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Rock1(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Rock2 => {
+                            Rock2State::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Rock2(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Rock3 => {
+                            Rock3State::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Rock3(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Skull => {
+                            SkullState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Skull(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Slime => {
+                            SlimeState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Slime(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Snail => {
+                            SnailState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Snail(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Trunk => {
+                            TrunkState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Trunk(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
+                        EnemyType::Turtle => {
+                            TurtleState::iter()
+                                .enumerate()
+                                .for_each(|(inner_idx, variant)| {
+                                    spawn(
+                                        enemy_graphic,
+                                        EnemyState::Turtle(variant),
+                                        outer_idx,
+                                        inner_idx,
+                                    );
+                                })
+                        }
                     }
                 }
             });
-    }
-}
-
-impl Plugin for CoordinatorPlugin {
-    fn build(&self, app: &mut App) {
-        app.add_startup_system(Self::spawn_enemy_variants);
     }
 }

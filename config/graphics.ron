@@ -194,5 +194,136 @@
 				Enemy(State(Mushroom(Run))): (start: 32, frames: 16),
 			}
 		),
+		Enemy(Type(Plant)): (
+			location: "sprites/Enemies/Plant.png",
+			tile_size: (44.0, 42.0),
+			cols: 11,
+			rows: 3,
+			sheets: {
+				Enemy(State(Plant(Attack))): (start: 0, frames: 8),
+				Enemy(State(Plant(Hit))): (start: 11, frames: 5),
+				Enemy(State(Plant(Idle))): (start: 22, frames: 11),
+			}
+		),
+		Enemy(Type(Radish)): (
+			location: "sprites/Enemies/Radish.png",
+			tile_size: (30.0, 38.0),
+			cols: 12,
+			rows: 4,
+			sheets: {
+				Enemy(State(Radish(Hit))): (start: 0, frames: 5),
+				Enemy(State(Radish(Idle1))): (start: 12, frames: 6),
+				Enemy(State(Radish(Idle2))): (start: 24, frames: 9),
+				Enemy(State(Radish(Run))): (start: 36, frames: 12),
+			}
+		),
+		Enemy(Type(Rhino)): (
+			location: "sprites/Enemies/Rhino.png",
+			tile_size: (52.0, 34.0),
+			cols: 11,
+			rows: 4,
+			sheets: {
+				Enemy(State(Rhino(Hit))): (start: 0, frames: 4),
+				Enemy(State(Rhino(HitWall))): (start: 11, frames: 5),
+				Enemy(State(Rhino(Idle))): (start: 22, frames: 11),
+				Enemy(State(Rhino(Run))): (start: 33, frames: 6),
+			}
+		),
+		Enemy(Type(Rock1)): (
+			location: "sprites/Enemies/Rock1.png",
+			tile_size: (38.0, 34.0),
+			cols: 14,
+			rows: 3,
+			sheets: {
+				Enemy(State(Rock1(Hit))): (start: 0, frames: 1),
+				Enemy(State(Rock1(Idle))): (start: 14, frames: 14),
+				Enemy(State(Rock1(Run))): (start: 28, frames: 14),
+			}
+		),
+		Enemy(Type(Rock2)): (
+			location: "sprites/Enemies/Rock2.png",
+			tile_size: (32.0, 28.0),
+			cols: 14,
+			rows: 3,
+			sheets: {
+				Enemy(State(Rock2(Hit))): (start: 0, frames: 1),
+				Enemy(State(Rock2(Idle))): (start: 14, frames: 14),
+				Enemy(State(Rock2(Run))): (start: 28, frames: 14),
+			}
+		),
+		Enemy(Type(Rock3)): (
+			location: "sprites/Enemies/Rock3.png",
+			tile_size: (22.0, 18.0),
+			cols: 14,
+			rows: 3,
+			sheets: {
+				Enemy(State(Rock3(Hit))): (start: 0, frames: 5),
+				Enemy(State(Rock3(Idle))): (start: 14, frames: 11),
+				Enemy(State(Rock3(Run))): (start: 28, frames: 14),
+			}
+		),
+		Enemy(Type(Skull)): (
+			location: "sprites/Enemies/Skull.png",
+			tile_size: (52.0, 54.0),
+			cols: 8,
+			rows: 5,
+			sheets: {
+				Enemy(State(Skull(Hit))): (start: 0, frames: 7),
+				Enemy(State(Skull(HitWall1))): (start: 8, frames: 7),
+				Enemy(State(Skull(HitWall2))): (start: 16, frames: 5),
+				Enemy(State(Skull(Idle1))): (start: 24, frames: 8),
+				Enemy(State(Skull(Idle2))): (start: 32, frames: 8),
+			}
+		),
+		Enemy(Type(Slime)): (
+			location: "sprites/Enemies/Slime.png",
+			tile_size: (44.0, 30.0),
+			cols: 10,
+			rows: 2,
+			sheets: {
+				Enemy(State(Slime(Hit))): (start: 0, frames: 5),
+				Enemy(State(Slime(IdleRun))): (start: 10, frames: 10),
+			}
+		),
+		Enemy(Type(Snail)): (
+			location: "sprites/Enemies/Snail.png",
+			tile_size: (38.0, 24.0),
+			cols: 15,
+			rows: 7,
+			sheets: {
+				Enemy(State(Snail(Hit))): (start: 0, frames: 5),
+				Enemy(State(Snail(Idle))): (start: 15, frames: 15),
+				Enemy(State(Snail(ShellIdle))): (start: 30, frames: 6),
+				Enemy(State(Snail(ShellTopHit))): (start: 45, frames: 5),
+				Enemy(State(Snail(ShellWallHit))): (start: 60, frames: 4),
+				Enemy(State(Snail(NoShell))): (start: 75, frames: 1),
+				Enemy(State(Snail(Walk))): (start: 90, frames: 10),
+			}
+		),
+		Enemy(Type(Trunk)): (
+			location: "sprites/Enemies/Trunk.png",
+			tile_size: (64.0, 32.0),
+			cols: 18,
+			rows: 4,
+			sheets: {
+				Enemy(State(Trunk(Attack))): (start: 0, frames: 11),
+				Enemy(State(Trunk(Hit))): (start: 18, frames: 5),
+				Enemy(State(Trunk(Idle))): (start: 36, frames: 18),
+				Enemy(State(Trunk(Run))): (start: 54, frames: 14),
+			}
+		),
+		Enemy(Type(Turtle)): (
+			location: "sprites/Enemies/Turtle.png",
+			tile_size: (44.0, 26.0),
+			cols: 14,
+			rows: 5,
+			sheets: {
+				Enemy(State(Turtle(Hit))): (start: 0, frames: 5),
+				Enemy(State(Turtle(Idle1))): (start: 14, frames: 14),
+				Enemy(State(Turtle(Idle2))): (start: 28, frames: 14),
+				Enemy(State(Turtle(SpikesIn))): (start: 42, frames: 8),
+				Enemy(State(Turtle(SpikesOut))): (start: 56, frames: 8),
+			}
+		)
 	}
 )

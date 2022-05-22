@@ -32,17 +32,17 @@ pub enum EnemyType {
     FatBird,
     Ghost,
     Mushroom,
-    // Plant,
-    // Radish,
-    // Rhino,
-    // Rock1,
-    // Rock2,
-    // Rock3,
-    // Skull,
-    // Slime,
-    // Snail,
-    // Trunk,
-    // Turtle
+    Plant,
+    Radish,
+    Rhino,
+    Rock1,
+    Rock2,
+    Rock3,
+    Skull,
+    Slime,
+    Snail,
+    Trunk,
+    Turtle,
 }
 
 #[derive(
@@ -71,17 +71,17 @@ pub enum EnemyState {
     FatBird(FatBirdState),
     Ghost(GhostState),
     Mushroom(MushroomState),
-    // Plant,
-    // Radish,
-    // Rhino,
-    // Rock1,
-    // Rock2,
-    // Rock3,
-    // Skull,
-    // Slime,
-    // Snail,
-    // Trunk,
-    // Turtle
+    Plant(PlantState),
+    Radish(RadishState),
+    Rhino(RhinoState),
+    Rock1(Rock1State),
+    Rock2(Rock2State),
+    Rock3(Rock3State),
+    Skull(SkullState),
+    Slime(SlimeState),
+    Snail(SnailState),
+    Trunk(TrunkState),
+    Turtle(TurtleState),
 }
 
 impl EnemyState {
@@ -98,6 +98,17 @@ impl EnemyState {
             EnemyState::FatBird(_) => EnemyType::FatBird,
             EnemyState::Ghost(_) => EnemyType::Ghost,
             EnemyState::Mushroom(_) => EnemyType::Mushroom,
+            EnemyState::Plant(_) => EnemyType::Plant,
+            EnemyState::Radish(_) => EnemyType::Radish,
+            EnemyState::Rhino(_) => EnemyType::Rhino,
+            EnemyState::Rock1(_) => EnemyType::Rock1,
+            EnemyState::Rock2(_) => EnemyType::Rock2,
+            EnemyState::Rock3(_) => EnemyType::Rock3,
+            EnemyState::Skull(_) => EnemyType::Skull,
+            EnemyState::Slime(_) => EnemyType::Slime,
+            EnemyState::Snail(_) => EnemyType::Snail,
+            EnemyState::Trunk(_) => EnemyType::Trunk,
+            EnemyState::Turtle(_) => EnemyType::Turtle,
         }
     }
 }
@@ -330,4 +341,234 @@ pub enum MushroomState {
     #[default]
     Idle,
     Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum PlantState {
+    Attack,
+    Hit,
+    #[default]
+    Idle,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum RadishState {
+    Hit,
+    #[default]
+    Idle1,
+    Idle2,
+    Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum RhinoState {
+    Hit,
+    HitWall,
+    #[default]
+    Idle,
+    Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum Rock1State {
+    Hit,
+    #[default]
+    Idle,
+    Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum Rock2State {
+    Hit,
+    #[default]
+    Idle,
+    Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum Rock3State {
+    Hit,
+    #[default]
+    Idle,
+    Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum SkullState {
+    Hit,
+    HitWall1,
+    HitWall2,
+    #[default]
+    Idle1,
+    Idle2,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum SlimeState {
+    Hit,
+    #[default]
+    IdleRun,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum SnailState {
+    Hit,
+    #[default]
+    Idle,
+    ShellIdle,
+    ShellTopHit,
+    ShellWallHit,
+    NoShell,
+    Walk,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum TrunkState {
+    Attack,
+    Hit,
+    #[default]
+    Idle,
+    Run,
+}
+
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Deserialize,
+    Display,
+    EnumIter,
+    Eq,
+    Inspectable,
+    Hash,
+    PartialEq,
+    SmartDefault,
+)]
+pub enum TurtleState {
+    Hit,
+    #[default]
+    Idle1,
+    Idle2,
+    SpikesIn,
+    SpikesOut,
 }
