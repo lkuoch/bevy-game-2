@@ -10,6 +10,12 @@ pub struct WithAnimation {
 
 pub struct AnimationPlugin;
 
+impl Plugin for AnimationPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_system(Self::frame_animation);
+    }
+}
+
 impl AnimationPlugin {
     fn frame_animation(
         mut sprites: Query<(&mut TextureAtlasSprite, &mut WithAnimation)>,
@@ -22,12 +28,6 @@ impl AnimationPlugin {
                 sprite.index = animation.frames[animation.current_frame];
             }
         }
-    }
-}
-
-impl Plugin for AnimationPlugin {
-    fn build(&self, app: &mut App) {
-        app.add_system(Self::frame_animation);
     }
 }
 

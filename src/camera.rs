@@ -3,7 +3,7 @@ use crate::prelude::*;
 pub struct CameraPlugin;
 impl CameraPlugin {
     fn setup_camera(mut commands: Commands) {
-        commands.spawn_bundle(OrthographicCameraBundle::new_2d());
+        commands.spawn_bundle(Camera2dBundle::default());
     }
 }
 

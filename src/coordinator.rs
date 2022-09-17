@@ -10,10 +10,8 @@ impl Plugin for CoordinatorPlugin {
 
 impl CoordinatorPlugin {
     pub fn spawn_player_variants(mut commands: Commands, graphics: Res<Graphics>) {
-        // Render models
         for (player_idx, player_type) in PlayerType::iter().enumerate() {
             if let Some(player) = graphics.get(&Sprites::Player(SpriteModel::Type(player_type))) {
-                // Render animations
                 for (state_idx, player_state) in PlayerState::iter().enumerate() {
                     if let Some(anim) = player
                         .animations
@@ -58,9 +56,6 @@ impl CoordinatorPlugin {
                 .get(&Sprites::Enemy(SpriteModel::State(enemy_state)))
             {
                 let enemy_type = enemy_state.get_enemy_type();
-
-                // Magicbound: 19
-                let y_wrap = outer_idx / 19;
 
                 commands
                     .spawn_bundle(SpriteSheetBundle {
