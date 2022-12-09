@@ -1,11 +1,24 @@
 use crate::prelude::*;
 
 #[derive(Component, Reflect)]
-#[reflect(Component)]
 pub struct WithAnimation {
     pub timer: Timer,
-    pub current_frame: usize,
-    pub frames: Vec<usize>,
+    pub config: SpriteAnimation,
+    pub texture: Handle<TextureAtlas>,
+
+    curr_idx: usize,
+}
+
+impl WithAnimation {
+    pub fn new(texture: Handle<TextureAtlas>, anim: SpriteAnimation) -> Self {
+        Self {
+            timer: Timer::from_seconds(0.1, TimerMode::Repeating),
+            config: anim,
+            texture,
+
+            curr_idx: 0,
+        }
+    }
 }
 
 pub struct AnimationPlugin;
@@ -18,25 +31,16 @@ impl Plugin for AnimationPlugin {
 
 impl AnimationPlugin {
     fn frame_animation(
-        mut sprites: Query<(&mut TextureAtlasSprite, &mut WithAnimation)>,
+        mut query: Query<(&mut TextureAtlasSprite, &mut WithAnimation)>,
         time: Res<Time>,
     ) {
-        for (mut sprite, mut animation) in sprites.iter_mut() {
-            animation.timer.tick(time.delta());
-            if animation.timer.just_finished() {
-                animation.current_frame = (animation.current_frame + 1) % animation.frames.len();
-                sprite.index = animation.frames[animation.current_frame];
-            }
-        }
-    }
-}
+        for (mut sprite, mut anim) in query.iter_mut() {
+            anim.timer.tick(time.delta());
 
-impl Default for WithAnimation {
-    fn default() -> Self {
-        Self {
-            timer: Timer::from_seconds(0.1, true),
-            frames: Vec::new(),
-            current_frame: 0,
+            if anim.timer.just_finished() {
+                sprite.index = anim.curr_idx + anim.config.start;
+                anim.curr_idx = (anim.curr_idx + 1).rem_euclid(anim.config.frames);
+            }
         }
     }
 }

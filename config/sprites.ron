@@ -1,0 +1,71 @@
+(
+	players: [(
+		entity_type: MaskDude,
+		texture: (
+			location: "sprites/Players/MaskDude.png",
+			tile_size: (32.0, 32.0),
+			row_cols: (4, 12),
+		),
+		animation: {
+			MaskDude(DoubleJump): ( start: 0, frames: 6 ),
+			MaskDude(Fall): ( start: 6, frames: 1 ),
+			MaskDude(Jump): ( start: 7, frames: 1 ),
+			MaskDude(Hit): (start: 12, frames: 7 ),
+			MaskDude(WallJump): ( start: 19, frames: 5),
+			MaskDude(Idle): ( start: 24, frames: 11 ),
+			MaskDude(Run): (start: 36, frames: 12 )
+		}
+	),
+	(
+		entity_type: NinjaFrog,
+		texture: (
+			location: "sprites/Players/NinjaFrog.png",
+			tile_size: (32.0, 32.0),
+			row_cols: (4, 12),
+		),
+		animation: {
+			NinjaFrog(DoubleJump): ( start: 0, frames: 6 ),
+			NinjaFrog(Fall): ( start: 6, frames: 1 ),
+			NinjaFrog(Jump): ( start: 7, frames: 1 ),
+			NinjaFrog(Hit): (start: 12, frames: 7 ),
+			NinjaFrog(WallJump): ( start: 19, frames: 5),
+			NinjaFrog(Idle): ( start: 24, frames: 11 ),
+			NinjaFrog(Run): (start: 36, frames: 12 )
+		}
+	),
+	(
+		entity_type: PinkMan,
+		texture: (
+			location: "sprites/Players/PinkMan.png",
+			tile_size: (32.0, 32.0),
+			row_cols: (4, 12),
+		),
+		animation: {
+			PinkMan(DoubleJump): ( start: 0, frames: 6 ),
+			PinkMan(Fall): ( start: 6, frames: 1 ),
+			PinkMan(Jump): ( start: 7, frames: 1 ),
+			PinkMan(Hit): (start: 12, frames: 7 ),
+			PinkMan(WallJump): ( start: 19, frames: 5),
+			PinkMan(Idle): ( start: 24, frames: 11 ),
+			PinkMan(Run): (start: 36, frames: 12 )
+		}
+	),
+	(
+		entity_type: VirtualGuy,
+		texture: (
+			location: "sprites/Players/VirtualGuy.png",
+			tile_size: (32.0, 32.0),
+			row_cols: (4, 12),
+		),
+		animation: {
+			VirtualGuy(DoubleJump): ( start: 0, frames: 6 ),
+			VirtualGuy(Fall): ( start: 6, frames: 1 ),
+			VirtualGuy(Jump): ( start: 7, frames: 1 ),
+			VirtualGuy(Hit): (start: 12, frames: 7 ),
+			VirtualGuy(WallJump): ( start: 19, frames: 5),
+			VirtualGuy(Idle): ( start: 24, frames: 11 ),
+			VirtualGuy(Run): (start: 36, frames: 12 )
+		}
+	)
+	]
+)

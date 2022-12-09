@@ -1,68 +1,4 @@
-(
-	sprite_map: {
-		/// ===== PLAYERS =====
-		Player(Type(MaskDude)): (
-			location: "sprites/Players/MaskDude.png",
-			tile_size: (32.0, 32.0),
-			cols: 12,
-			rows: 4,
-			sheets: {
-				Player(State(DoubleJump)): ( start: 0, frames: 6 ),
-				Player(State(Fall)): ( start: 6, frames: 1 ),
-				Player(State(Jump)): ( start: 7, frames: 1 ),
-				Player(State(Hit)): (start: 12, frames: 7 ),
-				Player(State(WallJump)): ( start: 19, frames: 5),
-				Player(State(Idle)): ( start: 24, frames: 11 ),
-				Player(State(Run)): (start: 36, frames: 12 )
-			}
-		),
-		Player(Type(NinjaFrog)): (
-			location: "sprites/Players/NinjaFrog.png",
-			tile_size: (32.0, 32.0),
-			cols: 12,
-			rows: 4,
-			sheets: {
-				Player(State(DoubleJump)): ( start: 0, frames: 6 ),
-				Player(State(Fall)): ( start: 6, frames: 1 ),
-				Player(State(Jump)): ( start: 7, frames: 1 ),
-				Player(State(Hit)): (start: 12, frames: 7 ),
-				Player(State(WallJump)): ( start: 19, frames: 5),
-				Player(State(Idle)): ( start: 24, frames: 11 ),
-				Player(State(Run)): (start: 36, frames: 12 )
-			}
-		),
-		Player(Type(PinkMan)): (
-			location: "sprites/Players/PinkMan.png",
-			tile_size: (32.0, 32.0),
-			cols: 12,
-			rows: 4,
-			sheets: {
-				Player(State(DoubleJump)): ( start: 0, frames: 6 ),
-				Player(State(Fall)): ( start: 6, frames: 1 ),
-				Player(State(Jump)): ( start: 7, frames: 1 ),
-				Player(State(Hit)): (start: 12, frames: 7 ),
-				Player(State(WallJump)): ( start: 19, frames: 5),
-				Player(State(Idle)): ( start: 24, frames: 11 ),
-				Player(State(Run)): (start: 36, frames: 12 )
-			}
-		),
-		Player(Type(VirtualGuy)): (
-			location: "sprites/Players/VirtualGuy.png",
-			tile_size: (32.0, 32.0),
-			cols: 12,
-			rows: 4,
-			sheets: {
-				Player(State(DoubleJump)): ( start: 0, frames: 6 ),
-				Player(State(Fall)): ( start: 6, frames: 1 ),
-				Player(State(Jump)): ( start: 7, frames: 1 ),
-				Player(State(Hit)): (start: 12, frames: 7 ),
-				Player(State(WallJump)): ( start: 19, frames: 5),
-				Player(State(Idle)): ( start: 24, frames: 11 ),
-				Player(State(Run)): (start: 36, frames: 12 )
-			}
-		),
-
-		/// === ENEMIES ===
+/// === ENEMIES ===
 		Enemy(Type(AngryPig)): (
 			location: "sprites/Enemies/AngryPig.png",
 			tile_size: (36.0, 30.0),
@@ -325,5 +261,3 @@
 				Enemy(State(Turtle(SpikesOut))): (start: 56, frames: 8),
 			}
 		)
-	}
-)

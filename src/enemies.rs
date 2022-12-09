@@ -1,24 +1,6 @@
 use crate::prelude::*;
 
-#[derive(Component, Debug, Inspectable)]
-pub struct Enemy {
-    pub enemy_type: EnemyType,
-    pub enemy_state: EnemyState,
-}
-
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq, Serialize)]
 pub enum EnemyType {
     #[default]
     AngryPig,
@@ -45,21 +27,8 @@ pub enum EnemyType {
     Turtle,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum EnemyState {
-    #[default]
     AngryPig(AngryPigState),
     Bat(BatState),
     Bee(BeeState),
@@ -113,19 +82,7 @@ impl EnemyState {
     }
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum AngryPigState {
     Hit1,
     Hit2,
@@ -135,19 +92,7 @@ pub enum AngryPigState {
     Walk,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum BatState {
     CeilingIn,
     CeilingOut,
@@ -157,19 +102,7 @@ pub enum BatState {
     Idle,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum BeeState {
     Attack,
     Hit,
@@ -177,38 +110,14 @@ pub enum BeeState {
     Idle,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum BlueBirdState {
     #[default]
     Flying,
     Hit,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum BunnyState {
     Fall,
     Hit,
@@ -218,19 +127,7 @@ pub enum BunnyState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum ChameleonState {
     Attack,
     Hit,
@@ -239,19 +136,7 @@ pub enum ChameleonState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum ChickenState {
     Hit,
     #[default]
@@ -259,19 +144,7 @@ pub enum ChickenState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum DuckState {
     Fall,
     Hit,
@@ -281,19 +154,7 @@ pub enum DuckState {
     JumpAnticipation,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum FatBirdState {
     Fall,
     Ground,
@@ -302,19 +163,7 @@ pub enum FatBirdState {
     Idle,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum GhostState {
     Appear,
     Disappear,
@@ -323,19 +172,7 @@ pub enum GhostState {
     Idle,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum MushroomState {
     Hit,
     #[default]
@@ -343,19 +180,7 @@ pub enum MushroomState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum PlantState {
     Attack,
     Hit,
@@ -363,19 +188,7 @@ pub enum PlantState {
     Idle,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum RadishState {
     Hit,
     #[default]
@@ -384,19 +197,7 @@ pub enum RadishState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum RhinoState {
     Hit,
     HitWall,
@@ -405,19 +206,7 @@ pub enum RhinoState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum Rock1State {
     Hit,
     #[default]
@@ -425,19 +214,7 @@ pub enum Rock1State {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum Rock2State {
     Hit,
     #[default]
@@ -445,19 +222,7 @@ pub enum Rock2State {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum Rock3State {
     Hit,
     #[default]
@@ -465,19 +230,7 @@ pub enum Rock3State {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum SkullState {
     Hit,
     HitWall1,
@@ -487,38 +240,14 @@ pub enum SkullState {
     Idle2,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum SlimeState {
     Hit,
     #[default]
     IdleRun,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum SnailState {
     Hit,
     #[default]
@@ -530,19 +259,7 @@ pub enum SnailState {
     Walk,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum TrunkState {
     Attack,
     Hit,
@@ -551,19 +268,7 @@ pub enum TrunkState {
     Run,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    Deserialize,
-    Display,
-    EnumIter,
-    Eq,
-    Inspectable,
-    Hash,
-    PartialEq,
-    SmartDefault,
-)]
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, Inspectable, Hash, PartialEq)]
 pub enum TurtleState {
     Hit,
     #[default]

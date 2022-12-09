@@ -1,28 +1,30 @@
 use crate::prelude::*;
 
-#[derive(Debug, Deserialize, Clone, Copy, Hash, PartialEq, Eq)]
-pub enum SpriteModel<T, S> {
-    Type(T),
-    State(S),
+#[derive(Debug, Deserialize, Clone)]
+pub struct SpriteConfig {
+    pub players: Vec<Sprites<PlayerType, PlayerState>>,
 }
 
-#[derive(Copy, Clone, Debug, Reflect, Deserialize, Hash, PartialEq, Eq)]
-pub enum Sprites {
-    Player(SpriteModel<PlayerType, PlayerState>),
-    Enemy(SpriteModel<EnemyType, EnemyState>),
+#[derive(Deserialize, Clone, Debug, PartialEq)]
+pub struct Sprites<T, S>
+where
+    T: std::hash::Hash + Eq,
+    S: std::hash::Hash + Eq,
+{
+    pub entity_type: T,
+    pub texture: SpriteTextureDesc,
+    pub animation: HashMap<S, SpriteAnimation>,
 }
 
-#[derive(Deserialize, Clone, Debug)]
-pub struct SpritesDesc {
+#[derive(Deserialize, Clone, Debug, PartialEq)]
+pub struct SpriteTextureDesc {
     pub location: String,
     pub tile_size: Vec2,
-    pub cols: usize,
-    pub rows: usize,
-    pub sheets: HashMap<Sprites, SpriteSheetDesc>,
+    pub row_cols: [u32; 2],
 }
 
-#[derive(Deserialize, Clone, Debug)]
-pub struct SpriteSheetDesc {
+#[derive(Deserialize, Copy, Clone, Debug, Eq, Hash, PartialEq, Reflect)]
+pub struct SpriteAnimation {
     pub start: usize,
     pub frames: usize,
 }

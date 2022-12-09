@@ -1,22 +1,33 @@
 use crate::prelude::*;
 
-#[derive(Debug, Clone, Deref, DerefMut)]
-pub struct Graphics(HashMap<Sprites, GraphicsDesc>);
+#[derive(Debug, Resource)]
+pub struct GraphicsResource {
+    pub players: HashMap<PlayerType, GraphicsDescription<PlayerState>>,
+}
 
-#[derive(Debug, Clone)]
-pub struct GraphicsDesc {
+impl GraphicsResource {
+    pub fn get_player(
+        &self,
+        player: PlayerType,
+        state: PlayerState,
+    ) -> Option<(Handle<TextureAtlas>, SpriteAnimation)> {
+        if let Some(player) = self.players.get(&player) {
+            if let Some(animation) = player.animation.get(&state) {
+                return Some((player.texture.clone(), *animation));
+            }
+        }
+
+        None
+    }
+}
+
+#[derive(Debug)]
+pub struct GraphicsDescription<S>
+where
+    S: std::hash::Hash + Eq,
+{
+    pub animation: HashMap<S, SpriteAnimation>,
     pub texture: Handle<TextureAtlas>,
-    pub animations: HashMap<Sprites, GraphicsAnimationsDesc>,
-}
-
-#[derive(Debug, Clone)]
-pub struct GraphicsAnimationsDesc {
-    pub frames: Vec<usize>,
-}
-
-#[derive(Debug, Deserialize, Clone)]
-struct GraphicsConfig {
-    sprite_map: HashMap<Sprites, SpritesDesc>,
 }
 
 pub struct GraphicsPlugin;
@@ -26,51 +37,44 @@ impl GraphicsPlugin {
         assets: Res<AssetServer>,
         mut texture_atlases: ResMut<Assets<TextureAtlas>>,
     ) {
-        let sprite_config: GraphicsConfig = match ron::from_str(
-            &fs::read_to_string("config/graphics.ron").expect("sprite config file"),
+        let sprite_config: SpriteConfig = match ron::from_str(
+            &fs::read_to_string("config/sprites.ron").expect("sprite config file"),
         ) {
             Ok(x) => x,
             Err(e) => {
-                println!("Failed to load 'config/graphics.ron': {}", e);
+                println!("Failed to load 'config/sprites.ron': {}", e);
                 std::process::exit(1);
             }
         };
 
         // This will be injected as a world resource
-        let mut sprite_map = HashMap::default();
+        let mut players_map = HashMap::default();
 
-        // Load all sprites
-        for (sprite, sprite_desc) in sprite_config.sprite_map.iter() {
+        // Load players
+        for player in sprite_config.players.iter() {
+            let [rows, cols] = player.texture.row_cols;
+
             let texture_handle = texture_atlases.add(TextureAtlas::from_grid(
-                assets.load(&sprite_desc.location),
-                sprite_desc.tile_size,
-                sprite_desc.cols,
-                sprite_desc.rows,
+                assets.load(&player.texture.location),
+                player.texture.tile_size,
+                cols as usize,
+                rows as usize,
+                None,
+                None,
             ));
 
-            let mut animation_map = HashMap::default();
-
-            // Load all animation clips of texture
-            for (anim, anim_desc) in sprite_desc.sheets.iter() {
-                animation_map.insert(
-                    *anim,
-                    GraphicsAnimationsDesc {
-                        frames: (anim_desc.start..(anim_desc.start + anim_desc.frames))
-                            .collect::<Vec<_>>(),
-                    },
-                );
-            }
-
-            sprite_map.insert(
-                *sprite,
-                GraphicsDesc {
-                    texture: texture_handle.clone(),
-                    animations: animation_map,
+            players_map.insert(
+                player.entity_type,
+                GraphicsDescription {
+                    animation: player.animation.to_owned(),
+                    texture: texture_handle,
                 },
             );
         }
 
-        commands.insert_resource(Graphics(sprite_map));
+        commands.insert_resource(GraphicsResource {
+            players: players_map,
+        });
     }
 }
 
