@@ -11,7 +11,7 @@ impl Plugin for CoordinatorPlugin {
 impl CoordinatorPlugin {
     pub fn spawn_player(mut commands: Commands, graphics: Res<GraphicsResource>) {
         let player_type = PlayerType::MaskDude;
-        let player_state = PlayerState::MaskDude(MaskDudeState::Idle);
+        let player_state = PlayerState::Idle;
 
         if let Some((texture, animation)) = graphics.get_player(player_type, player_state) {
             commands
@@ -25,10 +25,12 @@ impl CoordinatorPlugin {
                     },
                     ..default()
                 })
-                .insert(WithAnimation::new(texture, animation))
-                .insert(player_type)
-                .insert(player_state)
-                .insert(Name::new("Player"));
+                .insert((
+                    player_type,
+                    player_state,
+                    WithAnimation::new(texture, animation),
+                    Name::new("Player"),
+                ));
         }
     }
 
