@@ -25,11 +25,35 @@ pub struct AnimationPlugin;
 
 impl Plugin for AnimationPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(Self::frame_animation);
+        app.add_system(Self::frame_animation)
+            .add_system(Self::watch_player_model);
     }
 }
 
 impl AnimationPlugin {
+    fn watch_player_model(
+        mut query: Query<
+            (&mut Handle<TextureAtlas>, &PlayerType, &PlayerState),
+            Or<(Changed<PlayerType>, Changed<PlayerState>)>,
+        >,
+        graphics: Res<GraphicsResource>,
+    ) {
+        for (mut atlas, ptype, pstate) in query.iter_mut() {
+            // TODO: Mapping between player states
+            let nstate = match ptype {
+                PlayerType::MaskDude => PlayerState::MaskDude(MaskDudeState::Idle),
+                PlayerType::NinjaFrog => PlayerState::NinjaFrog(NinjaFrogState::Idle),
+                PlayerType::PinkMan => PlayerState::PinkMan(PinkManState::Idle),
+                PlayerType::VirtualGuy => PlayerState::VirtualGuy(VirtualGuyState::Idle),
+            };
+
+            println!("{:?}, {:?}", ptype, nstate);
+            if let Some((texture, _)) = graphics.get_player(*ptype, nstate) {
+                *atlas = texture;
+            }
+        }
+    }
+
     fn frame_animation(
         mut query: Query<(&mut TextureAtlasSprite, &mut WithAnimation)>,
         time: Res<Time>,

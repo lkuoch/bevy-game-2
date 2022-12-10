@@ -8,11 +8,11 @@ pub struct GraphicsResource {
 impl GraphicsResource {
     pub fn get_player(
         &self,
-        player: PlayerType,
-        state: PlayerState,
+        ptype: PlayerType,
+        pstate: PlayerState,
     ) -> Option<(Handle<TextureAtlas>, SpriteAnimation)> {
-        if let Some(player) = self.players.get(&player) {
-            if let Some(animation) = player.animation.get(&state) {
+        if let Some(player) = self.players.get(&ptype) {
+            if let Some(animation) = player.animation.get(&pstate) {
                 return Some((player.texture.clone(), *animation));
             }
         }

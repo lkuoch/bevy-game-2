@@ -27,6 +27,7 @@ impl CoordinatorPlugin {
                 })
                 .insert(WithAnimation::new(texture, animation))
                 .insert(player_type)
+                .insert(player_state)
                 .insert(Name::new("Player"));
         }
     }
