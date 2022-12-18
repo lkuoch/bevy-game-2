@@ -4,11 +4,22 @@ pub struct CoordinatorPlugin;
 
 impl Plugin for CoordinatorPlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(Self::spawn_player);
+        app.add_startup_system(Self::spawn_level)
+            .add_startup_system(Self::spawn_player);
     }
 }
 
 impl CoordinatorPlugin {
+    pub fn spawn_level(mut commands: Commands) {
+        let ground_size = 500.0;
+        let ground_height = 1.0;
+
+        commands.spawn((
+            TransformBundle::from(Transform::from_xyz(0.0, -ground_height, 0.0)),
+            Collider::cuboid(ground_size, ground_height),
+        ));
+    }
+
     pub fn spawn_player(mut commands: Commands, graphics: Res<GraphicsResource>) {
         let player_type = PlayerType::MaskDude;
         let player_state = PlayerState::Idle;
@@ -29,6 +40,11 @@ impl CoordinatorPlugin {
                     player_type,
                     player_state,
                     WithAnimation::new(texture, animation),
+                    RigidBody::Dynamic,
+                    Velocity::zero(),
+                    Collider::cuboid(13.0, 15.0),
+                    Restitution::coefficient(0.7),
+                    Player::default(),
                     Name::new("Player"),
                 ));
         }

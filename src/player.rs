@@ -4,6 +4,24 @@ use crate::prelude::*;
     Clone,
     Component,
     Copy,
+    Derivative,
+    Deserialize,
+    FromReflect,
+    Inspectable,
+    PartialEq,
+    Reflect,
+    Serialize,
+)]
+#[derivative(Debug, Default)]
+pub struct Player {
+    #[derivative(Default(value = "500.0"))]
+    pub move_speed: f32,
+}
+
+#[derive(
+    Clone,
+    Component,
+    Copy,
     Debug,
     Default,
     Deserialize,
