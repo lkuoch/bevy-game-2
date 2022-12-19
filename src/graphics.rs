@@ -2,14 +2,14 @@ use crate::prelude::*;
 
 #[derive(Debug, Resource)]
 pub struct GraphicsResource {
-    pub players: HashMap<PlayerType, GraphicsDescription<PlayerState>>,
+    pub players: HashMap<PlayerVariant, GraphicsDescription<PlayerStates>>,
 }
 
 impl GraphicsResource {
     pub fn get_player(
         &self,
-        ptype: PlayerType,
-        pstate: PlayerState,
+        ptype: &PlayerVariant,
+        pstate: &PlayerStates,
     ) -> Option<(Handle<TextureAtlas>, SpriteAnimation)> {
         if let Some(player) = self.players.get(&ptype) {
             if let Some(animation) = player.animation.get(&pstate) {

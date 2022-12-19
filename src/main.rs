@@ -8,6 +8,7 @@ mod physics;
 mod player;
 mod prelude;
 mod sprites;
+mod state;
 
 use crate::prelude::*;
 
@@ -21,5 +22,6 @@ fn main() {
         .add_plugin(AnimationPlugin)
         .add_plugin(InspectorPlugin)
         .add_plugin(PhysicsPlugin)
+        .add_plugin(StatePlugin)
         .run();
 }

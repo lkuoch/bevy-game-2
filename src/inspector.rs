@@ -6,7 +6,8 @@ impl Plugin for InspectorPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugin(WorldInspectorPlugin::new())
             .register_type::<WithAnimation>()
-            .register_inspectable::<PlayerType>()
-            .register_inspectable::<PlayerState>();
+            .register_inspectable::<Player>()
+            .register_inspectable::<PlayerVariant>()
+            .register_inspectable::<PlayerStates>();
     }
 }

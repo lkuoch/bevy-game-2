@@ -5,6 +5,7 @@ pub use bevy::{prelude::*, utils::HashMap, window::PresentMode};
 pub use bevy_inspector_egui::Inspectable;
 pub use bevy_rapier2d::prelude::*;
 pub use derivative::Derivative;
+pub use seldom_state::{prelude::*, StateMachinePlugin};
 pub use serde::{Deserialize, Serialize};
 pub use std::{fmt, fs};
 
@@ -18,3 +19,4 @@ pub use crate::inspector::*;
 pub use crate::physics::*;
 pub use crate::player::*;
 pub use crate::sprites::*;
+pub use crate::state::*;

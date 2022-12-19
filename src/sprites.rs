@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct SpriteConfig {
-    pub players: Vec<Sprites<PlayerType, PlayerState>>,
+    pub players: Vec<Sprites<PlayerVariant, PlayerStates>>,
 }
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]

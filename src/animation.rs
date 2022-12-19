@@ -26,25 +26,25 @@ pub struct AnimationPlugin;
 impl Plugin for AnimationPlugin {
     fn build(&self, app: &mut App) {
         app.add_system(Self::frame_animation)
-            .add_system(Self::player_model);
+            .add_system(Self::player_animation);
     }
 }
 
 impl AnimationPlugin {
-    fn player_model(
+    fn player_animation(
         mut query: Query<
             (
                 &mut Handle<TextureAtlas>,
                 &mut WithAnimation,
-                &PlayerType,
-                &PlayerState,
+                &Player,
+                &PlayerStates,
             ),
-            Or<(Changed<PlayerType>, Changed<PlayerState>)>,
+            Changed<PlayerStates>,
         >,
         graphics: Res<GraphicsResource>,
     ) {
-        for (mut atlas, mut anim, ptype, pstate) in query.iter_mut() {
-            if let Some((texture, animation)) = graphics.get_player(*ptype, *pstate) {
+        for (mut atlas, mut anim, player, state) in query.iter_mut() {
+            if let Some((texture, animation)) = graphics.get_player(&player.variant, state) {
                 anim.config = animation;
                 *atlas = texture;
             }

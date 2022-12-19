@@ -21,10 +21,11 @@ impl CoordinatorPlugin {
     }
 
     pub fn spawn_player(mut commands: Commands, graphics: Res<GraphicsResource>) {
-        let player_type = PlayerType::MaskDude;
-        let player_state = PlayerState::Idle;
+        let player = Player::default();
 
-        if let Some((texture, animation)) = graphics.get_player(player_type, player_state) {
+        if let Some((texture, animation)) =
+            graphics.get_player(&player.variant, &PlayerStates::Idle)
+        {
             commands
                 .spawn(SpriteSheetBundle {
                     texture_atlas: texture.clone(),
@@ -37,14 +38,12 @@ impl CoordinatorPlugin {
                     ..default()
                 })
                 .insert((
-                    player_type,
-                    player_state,
+                    player,
+                    player.new_state_machine(),
                     WithAnimation::new(texture, animation),
                     RigidBody::Dynamic,
                     Velocity::zero(),
                     Collider::cuboid(13.0, 15.0),
-                    Restitution::coefficient(0.7),
-                    Player::default(),
                     Name::new("Player"),
                 ));
         }
