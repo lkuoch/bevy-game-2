@@ -1,7 +1,7 @@
 
 Goals:
 
-- Implement Physics
+- Implement Physics with KinematicCharacterController
 - Use input manager to manage input
 - Migrate to lib to manage animation state (fsm vs behavior tree?)
 - Use ldtk to design a level

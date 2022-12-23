@@ -14,7 +14,7 @@ use crate::prelude::*;
 )]
 #[derivative(Debug, Default)]
 pub struct Player {
-    #[derivative(Default(value = "500.0"))]
+    #[derivative(Default(value = "10.0"))]
     pub move_speed: f32,
 
     pub variant: PlayerVariant,
@@ -130,11 +130,14 @@ pub mod player_states {
         use super::*;
 
         impl Trigger for RunTrigger {
-            type Param<'w, 's> = (Query<'w, 's, &'static Velocity>, Res<'w, Time>);
+            type Param<'w, 's> = (
+                Query<'w, 's, &'static KinematicCharacterControllerOutput>,
+                Res<'w, Time>,
+            );
 
             fn trigger(&self, _: Entity, (query, _time): &Self::Param<'_, '_>) -> bool {
-                for velocity in query.iter() {
-                    if velocity.linvel.x.round().abs() > 0.0 {
+                for controller in query.iter() {
+                    if controller.effective_translation.x.abs() > 0.0 {
                         return true;
                     }
                 }
@@ -144,11 +147,14 @@ pub mod player_states {
         }
 
         impl Trigger for FallTrigger {
-            type Param<'w, 's> = (Query<'w, 's, &'static Velocity>, Res<'w, Time>);
+            type Param<'w, 's> = (
+                Query<'w, 's, &'static KinematicCharacterControllerOutput>,
+                Res<'w, Time>,
+            );
 
             fn trigger(&self, _: Entity, (query, _time): &Self::Param<'_, '_>) -> bool {
-                for velocity in query.iter() {
-                    if velocity.linvel.y.round() < 0.0 {
+                for controller in query.iter() {
+                    if controller.effective_translation.y < 0.0 {
                         return true;
                     }
                 }
@@ -158,11 +164,14 @@ pub mod player_states {
         }
 
         impl Trigger for IdleTrigger {
-            type Param<'w, 's> = (Query<'w, 's, &'static Velocity>, Res<'w, Time>);
+            type Param<'w, 's> = (
+                Query<'w, 's, &'static KinematicCharacterControllerOutput>,
+                Res<'w, Time>,
+            );
 
             fn trigger(&self, _: Entity, (query, _time): &Self::Param<'_, '_>) -> bool {
-                for velocity in query.iter() {
-                    if velocity.linvel.round() == Vec2::ZERO {
+                for controller in query.iter() {
+                    if controller.effective_translation == Vec2::ZERO {
                         return true;
                     }
                 }
